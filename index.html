@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<title>Michael's Resume</title>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:300,400,500,600,700|Fira+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+	</head>
+	<body style="margin:0">
+		<div class="loading_screen" style="background-color:#00aaff;height:100vh;display:flex;flex-direction:column;justify-content:center;">
+			<svg width="100" height="100" style="display:block;margin:auto;width:71.428571429%;height:100%;" viewBox="0 -20 100 140">
+				<defs>
+					<linearGradient id="grada" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+						<stop offset="0%" style="stop-color:#000000;stop-opacity:1" id="grad1"/>
+						<stop offset="1%" style="stop-color:#000000;stop-opacity:1" id="grad2"/>
+					</linearGradient>
+					<linearGradient id="gradb" x1="100" y1="0" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+						<stop offset="0%" style="stop-color:#000000;stop-opacity:1" id="grad3"/>
+						<stop offset="1%" style="stop-color:#000000;stop-opacity:1" id="grad4"/>
+					</linearGradient>
+        </defs>
+				<circle cx="50", cy="50", r="49" fill="#000000" id="circ"/>
+        <path d="M50 50L50 0A50 50 90 0 1 100 50L50 50L100 50A 50 50 90 0 1 50 100L50 50L50 100A50 50 90 0 1 0 50L50 50L0 50A50 50 90 0 1 50 0L50 50" fill="#000000" id="ring1" transform='rotate(45,50,50)'  />
+        <path d="M50 50L50 0A50 50 90 0 1 100 50L50 50L100 50A 50 50 90 0 1 50 100L50 50L50 100A50 50 90 0 1 0 50L50 50L0 50A50 50 90 0 1 50 0L50 50" fill="#000000" id="ring2" transform='rotate(45,50,50)'  />
+				<text x="50" y="-10" fill="url(#grada)" dominant-baseline="middle" text-anchor="middle" font-size="15" style="font-family:'Fira Sans'">Loading</text>
+				<text x="50" y="110" fill="url(#gradb)" dominant-baseline="middle" text-anchor="middle" font-size="15" style="font-family:'Fira Code'">00.0%</text>
+			</svg>
+			<script>
+				var rings = [
+					document.getElementById("ring1"),
+					document.getElementById("ring2"),
+					document.getElementById("grad1"),
+					document.getElementById("grad2"),
+					document.getElementById("grad3"),
+					document.getElementById("grad4"),
+					document.getElementById("circ")
+					];
+				var template = (angle) => {
+					var c = Math.PI / 180
+					var angles = [(angle + 270) * c, angle * c, (angle + 90) * c, (angle + 180) * c];
+          rings[0].setAttribute("d", "M50 50L50 0A50 50 90 0 1 " + (((Math.cos(angles[0])+1) * 50) || 0).toString() + " " + (((Math.sin(angles[0])+1) * 50) || 0).toString() + "L50 50L100 50A50 50 90 0 1 " + (((Math.cos(angles[1])+1) * 50) || 0).toString() + " " + (((Math.sin(angles[1])+1) * 50) || 0).toString() + "L50 50L50 100A50 50 90 0 1 " + (((Math.cos(angles[2])+1) * 50) || 0).toString() + " " + (((Math.sin(angles[2])+1) * 50) || 0).toString() + "L50 50L0 50A50 50 90 0 1 " + (((Math.cos(angles[3])+1) * 50) || 0).toString() + " " + (((Math.sin(angles[3])+1) * 50) || 0).toString() + "L50 50");
+          rings[1].setAttribute("d", "M50 50L" + (((Math.cos(angles[0])+1) * 50) || 0).toString() + " " + (((Math.sin(angles[0])+1) * 50) || 0).toString() + "A50 50 90 0 1 100 50L50 50L" + (((Math.cos(angles[1])+1) * 50) || 0).toString() + " " + (((Math.sin(angles[1])+1) * 50) || 0).toString()+ "A 50 50 90 0 1 50 100L50 50L" + (((Math.cos(angles[2])+1) * 50) || 0).toString() + " " + (((Math.sin(angles[2])+1) * 50) || 0).toString() + "A50 50 90 0 1 0 50L50 50L" + (((Math.cos(angles[3])+1) * 50) || 0).toString() + " " + (((Math.sin(angles[3])+1) * 50) || 0).toString() + "A50 50 90 0 1 50 0L50 50");
+					rings[2].setAttribute("offset", (angle * 10/9).toString() + "%");
+          rings[3].setAttribute("offset", (angle * 10/9).toString() + "%");
+          rings[4].setAttribute("offset", (angle * 10/9).toString() + "%");
+					rings[5].setAttribute("offset", (angle * 10/9).toString() + "%");
+				};
+				var col = (p, c) => {
+					rings[0].setAttribute("fill", c);
+					rings[1].setAttribute("fill", p);
+					rings[6].setAttribute("fill", p);
+					rings[2].setAttribute("style", "stop-color:" + c + ";stop-opacity:1");
+					rings[3].setAttribute("style", "stop-color:" + p + ";stop-opacity:1");
+					rings[4].setAttribute("style", "stop-color:" + c + ";stop-opacity:1");
+					rings[5].setAttribute("style", "stop-color:" + p + ";stop-opacity:1");
+				};
+				var serp = (a, b, t) => a + (b - a) * (Math.cos(t * Math.PI) - 1) / -2;
+				var pallete = ["#00b", "#03c", "#05d", "#07e", "#0af"];
+				var colorwheel = [pallete[1], pallete[0], pallete[1], pallete[2]];
+				var ccol = colorwheel[1];
+				var pcol = colorwheel[0];
+				var stage = 1;
+				var angle = 0;
+				var ptime = 0;
+				var run = true;
+				template(0);
+				col(pcol, ccol);
+				function frame(time) {
+					var dtime = time - ptime;
+					ptime = time;
+					dtime /= 1000;
+					if (run) {
+						angle += dtime * 2 * 1.1;
+						if (angle > 1) {
+              if (angle > 1.1) {
+                angle = 0;
+                stage++;
+                if (stage >= colorwheel.length) stage = 0;
+                pcol = ccol;
+                ccol = colorwheel[stage];
+                col(pcol, ccol);
+						    template(0);
+              }
+						} else {
+						  template(serp(0, 90, angle));
+            }
+					}
+					requestAnimationFrame(frame);
+				}
+				requestAnimationFrame(frame);
+			</script>
+		</div>
+	</body>
+</html>
